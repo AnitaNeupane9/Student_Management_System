@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AnitaSMS")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+56937da275704a1d02b0b7bee32d2b8d495e1dbf")]
 [assembly: System.Reflection.AssemblyProductAttribute("AnitaSMS")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AnitaSMS")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
