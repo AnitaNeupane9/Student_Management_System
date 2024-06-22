@@ -1,0 +1,144 @@
+﻿@model AnitaSMS.Models.Entity.Students
+
+@if (Model.Id > 0)
+{
+    <div>
+        <h1 class="text-center">Update Student</h1>
+        <hr />
+    </div>
+}
+else
+{
+    <div>
+        <h1 class="text-center">Add Student</h1>
+        <hr />
+    </div>
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Student Information</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="AddEdit" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group mb-3">
+                                    <label asp-for="FirstName" class="form-label"></label>
+                                    <input asp-for="FirstName" class="form-control" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label asp-for="MiddleName" class="form-label"></label>
+                                    <input asp-for="MiddleName" class="form-control" />
+                                    <span asp-validation-for="MiddleName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label asp-for="LastName" class="form-label"></label>
+                                    <input asp-for="LastName" class="form-control" />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label asp-for="Address" class="form-label"></label>
+                                    <input asp-for="Address" class="form-control" />
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label asp-for="Email" class="form-label"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label asp-for="PhoneNumber" class="form-label"></label>
+                                    <input asp-for="PhoneNumber" class="form-control" />
+                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label asp-for="Class" class="form-label"></label>
+                                    <input asp-for="Class" class="form-control" />
+                                    <span asp-validation-for="Class" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label asp-for="Section" class="form-label"></label>
+                                    <input asp-for="Section" class="form-control" />
+                                    <span asp-validation-for="Section" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label" asp-for="CourseId">Course</label>
+                                    <select asp-for="CourseId" class="form-control" asp-items="@(new SelectList(ViewBag.Course,"Id","CourseName"))">
+                                        <option value="null" selected disabled>-Choose-</option>
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="CourseId"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <div class="form-check">
+                                        <input asp-for="IsActive" class="form-check-input" />
+                                        <label asp-for="IsActive" class="form-check-label"></label>
+                                        <span asp-validation-for="IsActive" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group text-center">
+                                    <a href="@Url.Action("Index", "Student")" class="btn btn-sm btn-secondary float-start ms-2">Back to List</a>
+                                    @if (Model.Id > 0)
+                                    {
+                                        <button class="btn btn-sm btn-primary float-end" type="submit">Update</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-sm btn-primary float-end" type="submit">Create</button>
+                                    }
+                                    
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="image-uploaded">
+                                    @if (!string.IsNullOrEmpty(Model?.StudentProfileurl))
+                                    {
+                                        <img src="/@Model.StudentProfileurl" id="userPhotos" class="img-thumbnail align-center" style="height:200px;width:180px;" onerror="this.src = '../images/photo.jpg';">
+                                    }
+                                    else
+                                    {
+                                        <img id="userPhoto" src="~/images/photo.jpg" class="img-thumbnail align-center" style="height:200px;width:180px;">
+                                    }
+                                </div>
+                                <div class="input-group input-file mt-1">
+                                    <label class="input-group-btn">
+                                        <span class="btn btn-primary">
+                                            Upload Photo
+                                            <input asp-for="ImageFile" class="form-control" onchange="readURL(this)" style="display: none;" />
+                                        </span>
+                                    </label>
+                                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                if ('@Model?.StudentProfileurl' == '') {
+                    reader.onload = function (e) {
+                        $('#userPhoto').attr('src', e.target.result);
+                    }
+                } else {
+                    reader.onload = function (e) {
+                        $('#userPhotos').attr('src', e.target.result);
+                    }
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+}

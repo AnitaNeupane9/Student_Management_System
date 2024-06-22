@@ -1,0 +1,60 @@
+﻿@model AnitaSMS.Models.Entity.Courses
+
+@if (Model.Id > 0)
+{
+    <div>
+        <h1 class="text-center">Update Course</h1>
+        <hr />
+    </div>
+}
+else
+{
+    <div>
+        <h1 class="text-center">Add Course</h1>
+        <hr />
+    </div>
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Course Information</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="AddEdit" method="post">
+                        <div class="form-group mb-3">
+                            <label asp-for="CourseName" class="form-label"></label>
+                            <input asp-for="CourseName" class="form-control" />
+                            <span asp-validation-for="CourseName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="CourseDescription" class="form-label"></label>
+                            <input asp-for="CourseDescription" class="form-control" />
+                            <span asp-validation-for="CourseDescription" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <div class="form-check">
+                                <input asp-for="IsActive" class="form-check-input" />
+                                <label asp-for="IsActive" class="form-check-label"></label>
+                                <span asp-validation-for="IsActive" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group text-center">
+                            <a href="@Url.Action("Index", "Course")" class="btn btn-sm btn-secondary float-start ms-3">Back to List</a>
+                            @if (Model.Id > 0)
+                            {
+                                <button class="btn btn-sm btn-primary float-end" type="submit">Update</button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-sm btn-primary float-end" type="submit">Create</button>
+                            }
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
